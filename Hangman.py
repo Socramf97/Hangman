@@ -7,7 +7,7 @@ word_list = ["rule", 'didactic', 'gate', 'selective', 'coach', 'fat', 'enchantin
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 
 game_status = 'stop'
-chosen_word = ''
+chosen_word = []
 guessed = ''
 lives = 6
 correct_guesses = 0
@@ -16,16 +16,21 @@ letter_tracker = []
 
 def start_game():
     game_status = 'start'
-
+    
+"""Selects a random word from the word_list. Saves each letter in a list
+and stores the amount of blank spaces based on the length of the chosen word."""
 def select_word():
     if game_status == "stop":
-        rand_word = random.choice(word_list)  # choses random array number in word_list and returns the word of the word_list
-        chosen_word = rand_word    
+        rand_word = random.choice(word_list)
+        for i in range(len(rand_word)):
+            chosen_word.append((rand_word[i]))# choses random array number in word_list and returns the word of the word_list
+    for i in range(len(rand_word)):
+        letter_tracker.append("_")
     return chosen_word
-
+ 
 def user_guess():
     guess=input("Guess a letter: ")
-    if guess not in alphabet:
+    if guess not in alphabet: 
         input("You didn't enter a letter. Please try again: ")
     guessed = guess
     return guessed
@@ -41,7 +46,7 @@ def check_guess():
         correct_guesses += 1
         # need to figure out how to display blank spaces. THinking of 2 dictionaries. One to keep track of the entire word and one to keep track of the empty spaces.
         if lives != 0:
-            user_guess
+            user_guess()
         else:
             if correct_guesses == len(chosen_word):
                 end_game() 
@@ -63,7 +68,6 @@ def generate_blank_spaces():
 def replace_with_letter(): 
     return
 
-
-
-print(select_word())
+select_word()
 print(letter_tracker)
+3
